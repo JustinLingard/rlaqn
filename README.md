@@ -5,7 +5,7 @@ Justin Lingard : [prejjnl@gmail.com](prejjnl@gmail.com)
 
 
 # Overview
-```rlaqn``` allows retrieval of data from the [London Air API](http://www.londonair.org.uk/LondonAir/API/), the data feed of the [London Air Quality Network](http://www.londonair.org.uk/LondonAir/Default.aspx), operated by King's College London. The API provides a structured and convenient way to interact with the data from the LAQN.  Data is supplied in JSON format and does not rely on scraping data from HTML pages.
+```rlaqn``` allows retrieval of data from the [London Air API](http://www.londonair.org.uk/LondonAir/API/), the data feed of the [London Air Quality Network](http://www.londonair.org.uk/LondonAir/Default.aspx), operated by King's College London (KCL). The API provides a structured and convenient way to interact with the data from the LAQN.  Data is supplied in JSON format and does not rely on scraping data from HTML pages.
 
 # Similar packages
 + [```openair```](http://www.openair-project.org/) which provides open-source tools for the analysis of air pollution data
@@ -36,21 +36,23 @@ Load the ```rlaqn``` package:
 
 # Functions
 ## ```get_laqn_aq_objectives```
-```get_laqn_aq_objectives``` imports the pre-calculated air quality objectives for air pollutants for which national [air quality objectives](https://uk-air.defra.gov.uk/assets/documents/National_air_quality_objectives.pdf) exist:
+```get_laqn_aq_objectives``` imports pre-calculated air quality statistics from the London Air API for air pollutants for which national [air quality objectives](https://uk-air.defra.gov.uk/assets/documents/National_air_quality_objectives.pdf) exist, this includes:
 
 + carbon monoxide, CO
-+ nitrogen dioxide, NO<sub>2</sub>
-+ ozone, O<sub>3</sub>
-+ sulphur dioxide, SO<sub>2</sub>, and
-+ particulate matter, PM<sub>10</sub>.
++ nitrogen dioxide, NO~2~
++ ozone, O~3~
++ sulphur dioxide, SO~2~, and
++ particulate matter, PM~10~.
 
-Statistics are calculated for each site, where measurements are made, and year, since the inception of the network from a few stations in 1993, to the much larger current newtork. The use of pre-calculated statistics removes the need to caluclate these metrics from raw, hourly data, and ensures consistency (good agreement).
+Statistics are calculated for each air quality monitoring station in the LAQN, on a year-by-year basis. They are available from the inception of the network in 1993, when it was composed of a few stations, to the much larger, current day newtork. The use of pre-calculated statistics removes the need to caluclate these metrics from raw, hourly data, and ensures good consistency.
 
-No nitrogen oxides (NOx) and PM<sub>2.5</sub> data is currently available.  Ratification of the underlying air quality monitoring data, from which the statistics are calculated, is undertaken three to six months in arrears.  Subsequently statistics can vary over time, especially within the first six months of the calendar year, during which time the data should be seen as provisional.
+NOx and PM~2.5~ statistics are not currently available, but if generated in future, should be picked-up.
 
-This data is comparable to that shown under the air quality objective values and capture rates on the Annual Air Quality Report for each site in the LAQN, e.g., [Annual Air Quality Report for Westminster - Marylebone Road (01/01/2015 to 01/01/2016)](http://www.erg.kcl.ac.uk/weeklysitereport/asrstats.asp?site=MY1&startdate=1-Jan-2015).
+Note: *Ratification of the underlying air quality monitoring data, from which the statistics are calculated, is undertaken three to six months in arrears.  Subsequently, statistics for the current year can vary over time and should be viewed as provisional statistics (awaiting final ratification).*
 
-Site meta data, for each past and current air quality monitoring station in the LAQN, can be obtained using the ```get_laqn_sites``` function, as decsribed below.
+The pre-calculated air quality statistics from the London Air API are comparable to those shown under the air quality objective values and capture rates on the Annual Air Quality Report for each air quality monitoring station in the LAQN, c.f., [Annual Air Quality Report for Westminster - Marylebone Road (01/01/2015 to 01/01/2016)](http://www.erg.kcl.ac.uk/weeklysitereport/asrstats.asp?site=MY1&startdate=1-Jan-2015).
+
+Site meta data, for closed and current air quality monitoring stations in the LAQN, can be obtained using the ```get_laqn_sites``` function, as decsribed below.
 
 ```r
 > get_laqn_aq_objectives <- function (theGroup = "London", metric = "Annual",
@@ -63,7 +65,7 @@ By running:
 ```r
 > aq_objectives <- get_laqn_aq_objectives()
 ```
-returns all the air quality objectives since the inception of the network, even when the start year (```dates```) is set to 1980.  No data is retured for years where there is no data available.
+returns all the air quality objectives since the inception of the network, even when the start year (```dates```) is set to 1980 (prior to commencement of the network) as data isn't retured for years where no data available.
 
 ```r
 > head(aq_objectives)
@@ -97,12 +99,11 @@ returns all the air quality objectives since the inception of the network, even 
 6 1993                                                         Capture Rate (%)    93      YES
 ```
 ## ```get_laqn_sites```
-Site meta data, for each past and current air quality monitoring station in the LAQN, can be obtained using the ```get_laqn_sites``` function, e.g.,
+Site meta data, for closed and current air quality monitoring station in the LAQN, can be obtained using the ```get_laqn_sites``` function, e.g.,
 
 ```r
 > laqn_sites <- get_laqn_sites()
 ```
-
 
 ```r
 > head(laqn_sites)
@@ -164,9 +165,12 @@ Comparison of the output from ```get_laqn_sites``` with ```importMeta(source = "
 ```
 # Applications
 ## ```get_laqn_aq_objectives```
-The national air quality objective for hourly NO<sub>2</sub> permits 18 exceedances per year.  Due to high vehicle numbers and congestion in London, road transport NO<sub>2</sub> emissions are correspondingly high and this objective is exceeded at a number of sites close to heavily trafficked roads.
+The national air quality objective for hourly NO~2~ permits 18 exceedances per year (also termed the *99.8^th^
+percentile*). [Defra's Local Air Quality Management Technical Guidance (TG16) document](http://laqm.defra.gov.uk/documents/LAQM-TG16-April-16-v1.pdf) defines the locations at which hourly air quality objectives apply as "... outdoor locations (as defined in Box 1.1 on p.1-8) where they might might reasonably expected to spend one hour or longer." For "Kerbside sites" this includes pavements of busy shopping streets.
 
-The air quality monitoring station at Marylebone Road (Westminster - Marylebone Road Kerbside, MY1) is located next to the six lane A501. Frequent elevated hourly NO<sub>2</sub> concentrations occur due to the high vehicle flows along the road which is an important thoroughfare in central London, running east-west from the Euston Road at Regent's Park, to the A40 Westway at Paddington.
+Due to high vehicle numbers and congestion on London's roads, road transport NOx emissions are high, especially in the vicinity of heavily trafficked roads, leading to elevated roadside NO~2~ concentrations. Consequently, this objective is exceeded at a number of roadside throughout the UK and in London. Some examples are given below.
+
+The air quality monitoring station at Marylebone Road (Westminster - Marylebone Road Kerbside, MY1) is located next to the six lane A501. Frequent elevated hourly NO~2~ concentrations occur due to the high vehicle flows along the road which is an important thoroughfare in central London, running east-west from the Euston Road at Regent's Park, to the A40 Westway at Paddington.
 
 Some words about Oxford Street
 
@@ -175,12 +179,12 @@ Some words about Oxford Street
 > library(dplyr)
 > westminster_sites <- aq_objectives %>% filter(SiteCode == "MY1" | SiteCode == "WM6" & ObjectiveName == "200 ug/m3 as a 1 hour mean, not to be exceeded more than 18 times a year")
 ```
-Frequent elevated hourly NO<sub>2</sub> concentrations also occur on Putney High Street, the A209.  Two air quality monitroing stations are located here: The first is Wandsworth - Putney High Street (WA7), the second Wandsworth - Putney High Street Facade (WA8). Putney High Street links traffic passing over Putney Bridge from central London to the South Circular Road (A205) and Upper Richmond Road, two major arterial roads in south London. Putney High Street has been described by some, as the most polluted street in London.
+Frequent elevated hourly NO~2~ concentrations occur on Putney High Street, the A209, as well.  Two air quality monitroing stations are located here: The first is Wandsworth - Putney High Street (WA7), the second Wandsworth - Putney High Street Facade (WA8). Putney High Street links traffic passing over Putney Bridge from central London to the South Circular Road (A205) and Upper Richmond Road, two major arterial roads in south London. Putney High Street has been described by some, as the most polluted street in south London.
 
 ```r
 > putney_sites <- aq_objectives %>% filter(SiteCode == "WA7" | SiteCode == "WA8"& ObjectiveName == "200 ug/m3 as a 1 hour mean, not to be exceeded more than 18 times a year")
 ```
-Combining the two sets of data provides an intercomparison of the number of exceedances of the hourly NO<sub>2</sub> national air quality objective at the two air quality monitoring stations located on these roads by year over the past twenty years. Data for 2017 has been removed and data for 2016 should be taken as provisional.
+Combining the two sets of data provides an intercomparison of the number of exceedances of the hourly NO~2~ national air quality objective at the two air quality monitoring stations located on these roads by year over the past twenty years. Data for 2017 has been removed and data for 2016 should be taken as provisional.
 
 ```r
 > theData <- plyr::rbind.fill(marylebone_road, putney_sites)
@@ -194,6 +198,7 @@ Hourly NO<sub>2</sub> concentrations at all sites exceed the national air qualit
 ## ```get_laqn_sites```
 To view the location of the air quality monitoring stations in the LAQN at Marylebone Road, Oxford Street and Putney High Street use the ouput from ```get_laqn_sites```.
 
+Note: *The two sites in Putney appear coincident when plotted at *```zoom = 12``` as given in the code below.
 
 ```r
 > #  Select theSites
