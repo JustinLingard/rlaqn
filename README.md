@@ -5,7 +5,7 @@ Justin Lingard : [prejjnl@gmail.com](prejjnl@gmail.com)
 
 
 # Overview
-```rlaqn``` allows retrieval of data from the [London Air API](http://www.londonair.org.uk/LondonAir/API/), the data feed of the [London Air Quality Network](http://www.londonair.org.uk/LondonAir/Default.aspx) operated by King's College London. The API provides a structured and convenient way to interact with the data from the LAQN.  Data is supplied in JSON format and does not rely on scraping data from HTML pages.
+```rlaqn``` allows retrieval of data from the [London Air API](http://www.londonair.org.uk/LondonAir/API/), the data feed of the [London Air Quality Network](http://www.londonair.org.uk/LondonAir/Default.aspx), operated by King's College London. The API provides a structured and convenient way to interact with the data from the LAQN.  Data is supplied in JSON format and does not rely on scraping data from HTML pages.
 
 # Similar packages
 + [```openair```](http://www.openair-project.org/) which provides open-source tools for the analysis of air pollution data
