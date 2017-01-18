@@ -179,12 +179,12 @@ Some words about Oxford Street
 > library(dplyr)
 > westminster_sites <- aq_objectives %>% filter(SiteCode == "MY1" | SiteCode == "WM6" & ObjectiveName == "200 ug/m3 as a 1 hour mean, not to be exceeded more than 18 times a year")
 ```
-Frequent elevated hourly NO~2~ concentrations occur on Putney High Street, the A209, as well.  Two air quality monitroing stations are located here: The first is Wandsworth - Putney High Street (WA7), the second Wandsworth - Putney High Street Facade (WA8). Putney High Street links traffic passing over Putney Bridge from central London to the South Circular Road (A205) and Upper Richmond Road, two major arterial roads in south London. Putney High Street has been described by some, as the most polluted street in south London.
+Frequent elevated hourly NO<sub>2</sub> concentrations occur on Putney High Street, the A209, as well.  Two air quality monitroing stations are located here: The first is Wandsworth - Putney High Street (WA7), the second Wandsworth - Putney High Street Facade (WA8). Putney High Street links traffic passing over Putney Bridge from central London to the South Circular Road (A205) and Upper Richmond Road, two major arterial roads in south London. Putney High Street has been described by some, as the most polluted street in south London.
 
 ```r
 > putney_sites <- aq_objectives %>% filter(SiteCode == "WA7" | SiteCode == "WA8"& ObjectiveName == "200 ug/m3 as a 1 hour mean, not to be exceeded more than 18 times a year")
 ```
-Combining the two sets of data provides an intercomparison of the number of exceedances of the hourly NO~2~ national air quality objective at the two air quality monitoring stations located on these roads by year over the past twenty years. Data for 2017 has been removed and data for 2016 should be taken as provisional.
+Combining the two sets of data provides an intercomparison of the number of exceedances of the hourly NO<sub>2</sub> national air quality objective at the two air quality monitoring stations located on these roads by year over the past twenty years. Data for 2017 has been removed and data for 2016 should be taken as provisional.
 
 ```r
 > theData <- plyr::rbind.fill(marylebone_road, putney_sites)
@@ -198,7 +198,7 @@ Hourly NO<sub>2</sub> concentrations at all sites exceed the national air qualit
 ## ```get_laqn_sites```
 To view the location of the air quality monitoring stations in the LAQN at Marylebone Road, Oxford Street and Putney High Street use the ouput from ```get_laqn_sites```.
 
-Note: *The two sites in Putney appear coincident when plotted at *```zoom = 12``` as given in the code below.
+Note: *The two sites in Putney appear coincident when plotted at* ```zoom = 12``` *, as given in the code below*.
 
 ```r
 > #  Select theSites
