@@ -184,7 +184,7 @@ Frequent elevated hourly NO<sub>2</sub> concentrations occur on Putney High Stre
 ```r
 > putney_sites <- aq_objectives %>% filter(SiteCode == "WA7" | SiteCode == "WA8"& ObjectiveName == "200 ug/m3 as a 1 hour mean, not to be exceeded more than 18 times a year")
 ```
-Combining the two sets of data provides an intercomparison of the number of exceedances of the hourly NO<sub>2</sub> national air quality objective at the two air quality monitoring stations located on these roads by year over the past twenty years. Data for 2017 has been removed and data for 2016 should be taken as provisional.
+Combining the two sets of data provides an intercomparison of the number of exceedances of the hourly NO<sub>2</sub> national air quality objective at the two air quality monitoring stations located on these roads by year over the past twenty years. Data for 2017 has been removed and data for 2016 should be taken as provisional, at the current time.
 
 ```r
 > theData <- plyr::rbind.fill(marylebone_road, putney_sites)
