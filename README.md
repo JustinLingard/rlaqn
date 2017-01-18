@@ -41,10 +41,10 @@ Load the ```rlaqn``` package:
 + carbon monoxide, CO
 + nitrogen dioxide, NO<sub>2</sub>
 + ozone, O<sub>3</sub>
-+ sulphur dioxide, SO<sub>2<sub>, and
++ sulphur dioxide, SO<sub>2</sub>, and
 + particulate matter, PM<sub>10</sub>.
 
-Statistics are calculated for each air quality monitoring station in the LAQN, on a year-by-year basis. They are available from the inception of the network in 1993, when it was composed of a few stations, to the much larger, current day newtork. The use of pre-calculated statistics removes the need to caluclate these metrics from raw, hourly data, and ensures good consistency.
+Statistics are calculated for each air quality monitoring station in the LAQN, on a year-by-year basis. They are available from the inception of the network in 1993, when it was composed of a few stations, to the much larger, current day network. The use of pre-calculated statistics removes the need to caluclate these metrics from raw, hourly data, and ensures good consistency.
 
 NOx and PM<sub>2.5</sub> statistics are not currently available, but if generated in future, should be picked-up.
 
