@@ -170,7 +170,7 @@ percentile*). [Defra's Local Air Quality Management Technical Guidance (TG16) do
 
 Due to high vehicle numbers and congestion on London's roads, road transport NOx emissions are high, especially in the vicinity of heavily trafficked roads, leading to elevated roadside NO<sub>2</sub> concentrations. Consequently, this objective is exceeded at a number of roadside throughout the UK and in London. Some examples are given below.
 
-The air quality monitoring station at Marylebone Road (Westminster - Marylebone Road Kerbside, MY1) is located next to the six lane A501. Frequent elevated hourly NO~2~ concentrations occur due to the high vehicle flows along the road which is an important thoroughfare in central London, running east-west from the Euston Road at Regent's Park, to the A40 Westway at Paddington.
+The air quality monitoring station at Marylebone Road (Westminster - Marylebone Road Kerbside, MY1) is located next to the six lane A501. Frequent elevated hourly NO<sub>2</sub> concentrations occur due to the high vehicle flows along the road which is an important thoroughfare in central London, running east-west from the Euston Road at Regent's Park, to the A40 Westway at Paddington.
 
 Some words about Oxford Street
 
@@ -193,6 +193,7 @@ Combining the two sets of data provides an intercomparison of the number of exce
 ```
 
 ![](README_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+
 Hourly NO<sub>2</sub> concentrations at all sites exceed the national air quality objective as the number of exceedances is more than the 18 permitted per year.  Whilst the number of exceedances at both sites has fallen in recent years the number of exceedances on Putney High Street was 1443 in 2015 year, whilst the number at Marylebone Road was 56.
 
 ## ```get_laqn_sites```
