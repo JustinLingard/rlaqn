@@ -39,14 +39,14 @@ Load the ```rlaqn``` package:
 ```get_laqn_aq_objectives``` imports pre-calculated air quality statistics from the London Air API for air pollutants for which national [air quality objectives](https://uk-air.defra.gov.uk/assets/documents/National_air_quality_objectives.pdf) exist, this includes:
 
 + carbon monoxide, CO
-+ nitrogen dioxide, NO~2~
-+ ozone, O~3~
-+ sulphur dioxide, SO~2~, and
-+ particulate matter, PM~10~.
++ nitrogen dioxide, NO<sub>2</sub>
++ ozone, O<sub>3</sub>
++ sulphur dioxide, SO<sub>2<sub>, and
++ particulate matter, PM<sub>10</sub>.
 
 Statistics are calculated for each air quality monitoring station in the LAQN, on a year-by-year basis. They are available from the inception of the network in 1993, when it was composed of a few stations, to the much larger, current day newtork. The use of pre-calculated statistics removes the need to caluclate these metrics from raw, hourly data, and ensures good consistency.
 
-NOx and PM~2.5~ statistics are not currently available, but if generated in future, should be picked-up.
+NOx and PM<sub>2.5</sub> statistics are not currently available, but if generated in future, should be picked-up.
 
 Note: *Ratification of the underlying air quality monitoring data, from which the statistics are calculated, is undertaken three to six months in arrears.  Subsequently, statistics for the current year can vary over time and should be viewed as provisional statistics (awaiting final ratification).*
 
@@ -165,10 +165,10 @@ Comparison of the output from ```get_laqn_sites``` with ```importMeta(source = "
 ```
 # Applications
 ## ```get_laqn_aq_objectives```
-The national air quality objective for hourly NO~2~ permits 18 exceedances per year (also termed the *99.8^th^
+The national air quality objective for hourly NO<sub>2</sub> permits 18 exceedances per year (also termed the *99.8<sup>th</sup>
 percentile*). [Defra's Local Air Quality Management Technical Guidance (TG16) document](http://laqm.defra.gov.uk/documents/LAQM-TG16-April-16-v1.pdf) defines the locations at which hourly air quality objectives apply as "... outdoor locations (as defined in Box 1.1 on p.1-8) where they might might reasonably expected to spend one hour or longer." For "Kerbside sites" this includes pavements of busy shopping streets.
 
-Due to high vehicle numbers and congestion on London's roads, road transport NOx emissions are high, especially in the vicinity of heavily trafficked roads, leading to elevated roadside NO~2~ concentrations. Consequently, this objective is exceeded at a number of roadside throughout the UK and in London. Some examples are given below.
+Due to high vehicle numbers and congestion on London's roads, road transport NOx emissions are high, especially in the vicinity of heavily trafficked roads, leading to elevated roadside NO<sub>2</sub> concentrations. Consequently, this objective is exceeded at a number of roadside throughout the UK and in London. Some examples are given below.
 
 The air quality monitoring station at Marylebone Road (Westminster - Marylebone Road Kerbside, MY1) is located next to the six lane A501. Frequent elevated hourly NO~2~ concentrations occur due to the high vehicle flows along the road which is an important thoroughfare in central London, running east-west from the Euston Road at Regent's Park, to the A40 Westway at Paddington.
 
