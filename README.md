@@ -48,7 +48,7 @@ Statistics are calculated for each air quality monitoring station in the LAQN, o
 
 NOx (nitrogen oxides) and PM<sub>2.5</sub> statistics are not currently available, but if generated in future, should be picked-up.
 
-Note: *Ratification of the underlying air quality monitoring data, from which the statistics are calculated, is undertaken three to six months in arrears.  Subsequently, statistics for the current year can vary over time and should be viewed as provisional statistics (awaiting final ratification).*
+**Note:** *Ratification of the underlying air quality monitoring data, from which the statistics are calculated, is undertaken three to six months in arrears.  Subsequently, statistics for the current year can vary over time and should be viewed as provisional statistics (awaiting final ratification).*
 
 The pre-calculated air quality statistics from the London Air API are comparable to those shown under the air quality objective values and capture rates on the Annual Air Quality Report for each air quality monitoring station in the LAQN, c.f., [Annual Air Quality Report for Westminster - Marylebone Road (01/01/2015 to 01/01/2016)](http://www.erg.kcl.ac.uk/weeklysitereport/asrstats.asp?site=MY1&startdate=1-Jan-2015).
 
@@ -193,15 +193,17 @@ Combining the two sets of data provides an intercomparison of the number of exce
 > library(ggplot2)
 > ggplot(theData, aes(Year, Value, fill = SiteName)) + geom_bar(stat="identity") + scale_y_continuous(name ="Exceedances per year") + scale_fill_discrete(name="Site name")
 ```
+
 ![](README_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
-Note: *Measurements at Putney High Street commenced in 2009 and the following year at Putney High Street.  Measurements at Oxford Street started in 2013.*
+
+**Note:** *Measurements at Putney High Street commenced in 2009 and the following year at Putney High Street.  Measurements at Oxford Street started in 2013.*
 
 Hourly NO<sub>2</sub> concentrations at all sites exceed the national air quality objective as the number of exceedances is more than the 18 permitted per year.  Whilst the number of exceedances at both sites has fallen in recent years the number of exceedances on Putney High Street was 1443 in 2015 year, whilst the number at Marylebone Road was 56.
 
 ## ```get_laqn_sites```
 To view the location of the air quality monitoring stations in the LAQN at Marylebone Road, Oxford Street and Putney High Street use the ouput from ```get_laqn_sites```.
 
-Note: *The two sites in Putney appear coincident when plotted at* ```zoom = 12``` *, as given in the code below*.
+**Note:** *The two sites in Putney appear coincident when plotted at* ```zoom = 12``` *, as given in the code below*.
 
 ```r
 > #  Select theSites
@@ -219,4 +221,4 @@ Note: *The two sites in Putney appear coincident when plotted at* ```zoom = 12``
 
 <!--html_preserve--><div id="htmlwidget-26da957a0ba81e6a07f0" style="width:672px;height:576px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-26da957a0ba81e6a07f0">{"x":{"setView":[[51.5,-0.17],12,[]],"calls":[{"method":"addTiles","args":["http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap\u003c/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA\u003c/a>"}]},{"method":"addMarkers","args":[["51.463429","51.4637206047191","51.52254","51.5139287404213"],["-0.215871","-0.215890144123119","-0.15459","-0.152792701881935"],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Wandsworth - Putney High Street, http://www.londonair.org.uk/london/asp/publicdetails.asp?site=WA7","Wandsworth - Putney High Street Facade, http://www.londonair.org.uk/london/asp/publicdetails.asp?site=WA8","Westminster - Marylebone Road, http://www.londonair.org.uk/london/asp/publicdetails.asp?site=MY1","Westminster - Oxford Street, http://www.londonair.org.uk/london/asp/publicdetails.asp?site=WM6"],null,null]}],"limits":{"lat":[1,4],"lng":[1,4]}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
-
+![](Rplot.png)
