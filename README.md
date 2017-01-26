@@ -5,18 +5,18 @@ Justin Lingard : [prejjnl@gmail.com](prejjnl@gmail.com)
 
 
 # Overview
-```rlaqn``` allows retrieval of data from the [London Air API](http://www.londonair.org.uk/LondonAir/API/), the data feed of the [London Air Quality Network](http://www.londonair.org.uk/LondonAir/Default.aspx), operated by King's College London (KCL). The API provides a structured and convenient way to interact with the data from the LAQN.  Data is supplied in JSON format and does not rely on scraping data from HTML pages.
+```rlaqn``` allows retrieval of data from the [London Air API](http://www.londonair.org.uk/LondonAir/API/), the data feed of the [London Air Quality Network](http://www.londonair.org.uk/LondonAir/Default.aspx), operated by King's College London (KCL). The API provides a structured and convenient way to interact with the data from the LAQN.  Data is supplied in JSON format.
 
 # Similar packages
 + [```openair```](http://www.openair-project.org/) which provides open-source tools for the analysis of air pollution data
 + [```ropenaq```](https://ropensci.org/tutorials/ropenaq_tutorial.html) which provides UK-AIR latest measured levels (see https://uk-air.defra.gov.uk/latest/currentlevels) as well as data from other countries
-+ [```rdefra```](https://github.com/ropenscilabs/rdefra) which allows retrieval of air pollution data from the Defra's Air Information Resource ([UK-AIR](https://uk-air.defra.gov.uk/)).
++ [```rdefra```](https://github.com/ropenscilabs/rdefra) which allows retrieval of air pollution data from the Defra's UK Air Information Resource ([UK-AIR](https://uk-air.defra.gov.uk/)).
 
 # Dependencies
 The ```rlaqn``` package depends some additional CRAN packages. Check for missing dependencies and install them using the commands below:
 
 ```r
-> packs <- c('dplyr', 'ggplot2', 'htmlwidgets', 'jsonlite', 'leaflet', 'mapview')
+> packs <- c('dplyr', 'ggplot2', 'jsonlite', 'leaflet', 'pander')
 > new.packages <- packs[!(packs %in% installed.packages()[, 'Package'])]
 > if(length(new.packages)) install.packages(new.packages)
 ```
@@ -36,7 +36,7 @@ Load the ```rlaqn``` package:
 
 # Functions
 ## ```get_laqn_aq_objectives```
-```get_laqn_aq_objectives``` imports the pre-calculated air quality objectives for air pollutants for which national [air quality objectives](https://uk-air.defra.gov.uk/assets/documents/National_air_quality_objectives.pdf) exist:
+```get_laqn_aq_objectives``` imports pre-calculated air quality objectives (statistics) for air pollutants for which national [air quality objectives](https://uk-air.defra.gov.uk/assets/documents/National_air_quality_objectives.pdf) exist from the London Air API:
 
 + carbon monoxide, CO
 + nitrogen dioxide, NO<sub>2</sub>
@@ -44,15 +44,15 @@ Load the ```rlaqn``` package:
 + sulphur dioxide, SO<sub>2</sub>, and
 + particulate matter, PM<sub>10</sub>.
 
-Statistics are calculated for each air quality monitoring station in the LAQN, on a year-by-year basis. They are available from the inception of the network in 1993, when it was composed of a few stations, to the much larger, current day network. The use of pre-calculated statistics removes the need to caluclate these metrics from raw, hourly data, and ensures good consistency.
+Statistics are calculated for each air quality monitoring station in the LAQN on a year-by-year basis. Statistics are available from the inception of the network in 1993, when it was composed of a few stations, to the much larger, current day network. The use of pre-calculated statistics removes the need to caluclate these metrics from raw, hourly data, and ensures good consistency with published data.
 
-NOx (nitrogen oxides) and PM<sub>2.5</sub> statistics are not currently available, but if generated in future, should be picked-up.
+NOx (nitrogen oxides) and PM<sub>2.5</sub> statistics are not currently available, but if generated in future, should be picked-up by the function.
 
 **Note:** *Ratification of the underlying air quality monitoring data, from which the statistics are calculated, is undertaken three to six months in arrears.  Subsequently, statistics for the current year can vary over time and should be viewed as provisional statistics (awaiting final ratification).*
 
-The pre-calculated air quality statistics from the London Air API are comparable to those shown under the air quality objective values and capture rates on the Annual Air Quality Report for each air quality monitoring station in the LAQN, c.f., [Annual Air Quality Report for Westminster - Marylebone Road (01/01/2015 to 01/01/2016)](http://www.erg.kcl.ac.uk/weeklysitereport/asrstats.asp?site=MY1&startdate=1-Jan-2015).
+Pre-calculated air quality statistics from the London Air API are comparable to those shown under the air quality objective values and capture rates on the Annual Air Quality Report for each air quality monitoring station in the LAQN, c.f., [Annual Air Quality Report for Westminster - Marylebone Road (01/01/2015 to 01/01/2016)](http://www.erg.kcl.ac.uk/weeklysitereport/asrstats.asp?site=MY1&startdate=1-Jan-2015).
 
-Site meta data, for each past and current air quality monitoring station in the LAQN, can be obtained using the ```get_laqn_sites``` function, as decsribed below.
+Site meta data for past and current air quality monitoring station in the LAQN can be obtained using the ```get_laqn_sites``` function, as decsribed below.
 
 ```r
 > get_laqn_aq_objectives <- function (theGroup = "London", metric = "Annual",
@@ -65,7 +65,7 @@ Running:
 ```r
 > aq_objectives <- get_laqn_aq_objectives()
 ```
-returns all the air quality objectives since the inception of the network, even when the start year (```dates```) is set to 1980.  No data is retured for years where there is no data available.
+returns all the air quality objectives since the inception of the network, even when the start year (```dates```) is set to 1980 (before the network came into existence).  No data is retured for years where there is no data available and the function will just return an error message before moving onto the next year.
 
 ```r
 > head(aq_objectives)
@@ -173,41 +173,139 @@ Due to high vehicle numbers and congestion on London's roads, road transport NOx
 
 The air quality monitoring station at Marylebone Road (Westminster - Marylebone Road Kerbside, MY1) is located next to the six lane A501. Frequent elevated hourly NO<sub>2</sub> concentrations occur due to the high vehicle flows along the road which is an important thoroughfare in central London, running east-west from the Euston Road at Regent's Park, to the A40 Westway at Paddington.
 
-Some words about Oxford Street
+Oxford Street forms part of the A40 and runs east-west, connecting traffic from the direction of Marble Arch, in the west, with Tottenham Court Road and Charing Cross Road, to the east. It is Europe's busiest shopping street, with around half a million daily visitors, and many retailers have flagship stores situated along the street. Traffic along the street is predominantly composed of buses and taxis, though cars have some restricted access via road intersections running perpendicular to Oxford Street. The air quality monitoring station in Oxford Street (Westminster - Oxford Street Kerbside, WM6) is located around 400, Oxford Street, opposite the entrance to the Selfridges department store seen here in [Google streetview](https://www.google.co.uk/maps/@51.5140307,-0.1525801,3a,75y,238.35h,76.36t/data=!3m6!1e1!3m4!1sJJcNTldyEc62NFXLfXk6QA!2e0!7i13312!8i6656). As Google streetview shows the monitoring enclosure is situated between two sets of lights: A pedestrian crossing and the traffic light controlled junction of North Audley Street, Orchard Street and Oxford Street.  Traffic can be seen queuing at the lights.
 
 ```r
 > # Load the plyr package
 > library(dplyr)
 > westminster_sites <- aq_objectives %>% filter(SiteCode == "MY1" | SiteCode == "WM6") %>% filter(ObjectiveName == "200 ug/m3 as a 1 hour mean, not to be exceeded more than 18 times a year")
 ```
-Frequent elevated hourly NO<sub>2</sub> concentrations also occur on Putney High Street, the A209.  Two air quality monitroing stations are located here: The first is Wandsworth - Putney High Street (WA7), the second Wandsworth - Putney High Street Facade (WA8). Putney High Street links traffic passing over Putney Bridge from central London to the South Circular Road (A205) and Upper Richmond Road, two major arterial roads in south London. Putney High Street has been described as the *most* polluted street in south London.
+Frequent elevated hourly NO<sub>2</sub> concentrations also occur on Putney High Street, the A209.  Two air quality monitroing stations are located here: The first is Wandsworth - Putney High Street (WA7), the second Wandsworth - Putney High Street Facade (WA8). Putney High Street links traffic passing over Putney Bridge, from the direction of central London, to the South Circular Road (A205) and Upper Richmond Road, two major arterial roads in south London. Putney High Street has been described as the **most** polluted street in south London.
 
 ```r
 > putney_sites <- aq_objectives %>% filter(SiteCode == "WA7" | SiteCode == "WA8") %>% filter( ObjectiveName == "200 ug/m3 as a 1 hour mean, not to be exceeded more than 18 times a year")
 ```
-Combining the two sets of data provides an intercomparison of the number of exceedances of the hourly NO<sub>2</sub> national air quality objective at the two air quality monitoring stations located on these roads by year over the past twenty years. Data for 2017 has been removed and data for 2016 should be taken as provisional.
+Combining the two sets of data provides an intercomparison of the number of exceedances of the hourly NO<sub>2</sub> national air quality objective at the four air quality monitoring stations by year over the past twenty years. Data for 2016 and 2017 has been removed as it is provisional and subject to further change, at the current time.
 
 ```r
 > theData <- plyr::rbind.fill(westminster_sites, putney_sites)
 > theData <- theData %>% filter(Year < as.integer(format(Sys.Date(), "%Y"))-1)
 > library(ggplot2)
-> ggplot(theData, aes(Year, Value, fill = SiteName)) + geom_bar(stat="identity") + scale_y_continuous(name ="Exceedances per year") + scale_fill_discrete(name="Site name")
+> ggplot(theData, aes(Year, Value, fill = SiteCode)) + geom_bar(stat ="identity", position = "dodge") + scale_y_continuous(name = "Exceedances per year") +  theme(legend.position = "none") + facet_grid(~SiteCode) + coord_flip()
 ```
 
-![](README_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
-**Note:** *Measurements at Putney High Street commenced in 2009 and the following year at Putney High Street.  Measurements at Oxford Street started in 2013.*
+```r
+# Table 1
+> theData <- arrange(select(theData, SiteCode, SiteName, Year, SpeciesCode, Value, Achieved), SiteCode, Year)
+> theData$SpeciesCode <- gsub(pattern = "NO2", replacement = "NO<sub>2</sub>", theData$SpeciesCode)
+> ggplot(theData, aes(Year, Value, fill = SiteCode)) + geom_bar(stat ="identity", position = "dodge") + scale_y_continuous(name = bquote('Exceedances of hourly' ~NO[2]~ 'air quality objective per year')) +  theme(legend.position = "none") + facet_grid(~SiteCode) + coord_flip()
+```
 
-Hourly NO<sub>2</sub> concentrations at all sites exceed the national air quality objective as the number of exceedances is more than the 18 permitted per year.  Whilst the number of exceedances at both sites has fallen in recent years the number of exceedances on Putney High Street was 1443 in 2015 year, whilst the number at Marylebone Road was 56.
+![](README_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+
+
+---------------------------------------------------------------------------------
+SiteCode   SiteName                      Year   SpeciesCode    Value   Achieved  
+---------- ----------------------------- ------ -------------- ------- ----------
+MY1        Westminster - Marylebone Road 1997   NO<sub>2</sub> 62      NO        
+
+MY1        Westminster - Marylebone Road 1998   NO<sub>2</sub> 66      NO        
+
+MY1        Westminster - Marylebone Road 1999   NO<sub>2</sub> 59      NO        
+
+MY1        Westminster - Marylebone Road 2000   NO<sub>2</sub> 103     NO        
+
+MY1        Westminster - Marylebone Road 2001   NO<sub>2</sub> 58      NO        
+
+MY1        Westminster - Marylebone Road 2002   NO<sub>2</sub> 2       YES       
+
+MY1        Westminster - Marylebone Road 2003   NO<sub>2</sub> 454     NO        
+
+MY1        Westminster - Marylebone Road 2004   NO<sub>2</sub> 527     NO        
+
+MY1        Westminster - Marylebone Road 2005   NO<sub>2</sub> 834     NO        
+
+MY1        Westminster - Marylebone Road 2006   NO<sub>2</sub> 665     NO        
+
+MY1        Westminster - Marylebone Road 2007   NO<sub>2</sub> 445     NO        
+
+MY1        Westminster - Marylebone Road 2008   NO<sub>2</sub> 801     NO        
+
+MY1        Westminster - Marylebone Road 2009   NO<sub>2</sub> 469     NO        
+
+MY1        Westminster - Marylebone Road 2010   NO<sub>2</sub> 524     NO        
+
+MY1        Westminster - Marylebone Road 2011   NO<sub>2</sub> 217     NO        
+
+MY1        Westminster - Marylebone Road 2012   NO<sub>2</sub> 122     NO        
+
+MY1        Westminster - Marylebone Road 2013   NO<sub>2</sub> 59      NO        
+
+MY1        Westminster - Marylebone Road 2014   NO<sub>2</sub> 60      NO        
+
+MY1        Westminster - Marylebone Road 2015   NO<sub>2</sub> 56      NO        
+
+WA7        Wandsworth - Putney High      2009   NO<sub>2</sub> 1107    NO        
+           Street                                                                
+
+WA7        Wandsworth - Putney High      2010   NO<sub>2</sub> 2480    NO        
+           Street                                                                
+
+WA7        Wandsworth - Putney High      2011   NO<sub>2</sub> 2768    NO        
+           Street                                                                
+
+WA7        Wandsworth - Putney High      2012   NO<sub>2</sub> 2740    NO        
+           Street                                                                
+
+WA7        Wandsworth - Putney High      2013   NO<sub>2</sub> 1580    NO        
+           Street                                                                
+
+WA7        Wandsworth - Putney High      2014   NO<sub>2</sub> 1537    NO        
+           Street                                                                
+
+WA7        Wandsworth - Putney High      2015   NO<sub>2</sub> 1443    NO        
+           Street                                                                
+
+WA8        Wandsworth - Putney High      2010   NO<sub>2</sub> 1059    NO        
+           Street Facade                                                         
+
+WA8        Wandsworth - Putney High      2011   NO<sub>2</sub> 1662    NO        
+           Street Facade                                                         
+
+WA8        Wandsworth - Putney High      2012   NO<sub>2</sub> 1726    NO        
+           Street Facade                                                         
+
+WA8        Wandsworth - Putney High      2013   NO<sub>2</sub> 661     NO        
+           Street Facade                                                         
+
+WA8        Wandsworth - Putney High      2014   NO<sub>2</sub> 505     NO        
+           Street Facade                                                         
+
+WA8        Wandsworth - Putney High      2015   NO<sub>2</sub> 336     NO        
+           Street Facade                                                         
+
+WM6        Westminster - Oxford Street   2013   NO<sub>2</sub> 1502    NO        
+
+WM6        Westminster - Oxford Street   2014   NO<sub>2</sub> 1532    NO        
+
+WM6        Westminster - Oxford Street   2015   NO<sub>2</sub> 1391    NO        
+---------------------------------------------------------------------------------
+
+Table: Exceedances of hourly NO<sub>2</sub> air quality objective per year
+
+**Note:** *There is no data for Putney High Street prior to 2009 whilst measurements at Putney High Street Facade commenced the following year.  NO<sub>2</sub> statistics for Oxford Street Kerbside are not available until 2013.*
+
+The plot and table show that hourly NO<sub>2</sub> concentrations at all sites routinely exceed the national air quality objective of 18 exceedances per year.  Whilst the number have fallen at all sites in recent years, it still remains high.  The number of exceedances were especially high at Putney High Street and Putney High Street Facade where 1443 and 336 exceedances, respectively, were recorded in 2015.  The number at Marylebone Road and Oxford Street Kerbside were 56 and 1391, respectively, for the same year.
 
 ## ```get_laqn_sites```
-To view the location of the air quality monitoring stations in the LAQN at Marylebone Road, Oxford Street and Putney High Street use the ouput from ```get_laqn_sites```.
+The location of the LAQN air quality monitoring stations at Marylebone Road, Oxford Street and Putney High Street can be viewed by using the ouput from ```get_laqn_sites```.
 
 **Note:** *The two sites in Putney appear coincident when plotted at* ```zoom = 12``` *, as given in the code below*.
 
 ```r
 > #  Select theSites
-> theSites <- laqn_sites %>% filter(DateClosed == "" & SiteCode == "MY1" | SiteCode == "WM6" | SiteCode == "WA7" | SiteCode == "WA8")
+> theSites <- laqn_sites %>% filter(SiteCode == "MY1" | SiteCode == "WM6" | SiteCode == "WA7" | SiteCode == "WA8")
 > # Load the leaflet package
 > library(leaflet)
 > m <- leaflet() %>%
@@ -219,6 +317,5 @@ To view the location of the air quality monitoring stations in the LAQN at Maryl
 > m  # Print the map
 ```
 
-<!--html_preserve--><div id="htmlwidget-26da957a0ba81e6a07f0" style="width:672px;height:576px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-26da957a0ba81e6a07f0">{"x":{"setView":[[51.5,-0.17],12,[]],"calls":[{"method":"addTiles","args":["http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap\u003c/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA\u003c/a>"}]},{"method":"addMarkers","args":[["51.463429","51.4637206047191","51.52254","51.5139287404213"],["-0.215871","-0.215890144123119","-0.15459","-0.152792701881935"],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Wandsworth - Putney High Street, http://www.londonair.org.uk/london/asp/publicdetails.asp?site=WA7","Wandsworth - Putney High Street Facade, http://www.londonair.org.uk/london/asp/publicdetails.asp?site=WA8","Westminster - Marylebone Road, http://www.londonair.org.uk/london/asp/publicdetails.asp?site=MY1","Westminster - Oxford Street, http://www.londonair.org.uk/london/asp/publicdetails.asp?site=WM6"],null,null]}],"limits":{"lat":[1,4],"lng":[1,4]}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+
 ![](Rplot.png)
