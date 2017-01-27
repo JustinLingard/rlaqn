@@ -205,98 +205,53 @@ Combining the two sets of data provides an intercomparison of the number of exce
 ![](README_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
 
 
----------------------------------------------------------------------------------
-SiteCode   SiteName                      Year   SpeciesCode    Value   Achieved  
----------- ----------------------------- ------ -------------- ------- ----------
-MY1        Westminster - Marylebone Road 1997   NO<sub>2</sub> 62      NO        
-
-MY1        Westminster - Marylebone Road 1998   NO<sub>2</sub> 66      NO        
-
-MY1        Westminster - Marylebone Road 1999   NO<sub>2</sub> 59      NO        
-
-MY1        Westminster - Marylebone Road 2000   NO<sub>2</sub> 103     NO        
-
-MY1        Westminster - Marylebone Road 2001   NO<sub>2</sub> 58      NO        
-
-MY1        Westminster - Marylebone Road 2002   NO<sub>2</sub> 2       YES       
-
-MY1        Westminster - Marylebone Road 2003   NO<sub>2</sub> 454     NO        
-
-MY1        Westminster - Marylebone Road 2004   NO<sub>2</sub> 527     NO        
-
-MY1        Westminster - Marylebone Road 2005   NO<sub>2</sub> 834     NO        
-
-MY1        Westminster - Marylebone Road 2006   NO<sub>2</sub> 665     NO        
-
-MY1        Westminster - Marylebone Road 2007   NO<sub>2</sub> 445     NO        
-
-MY1        Westminster - Marylebone Road 2008   NO<sub>2</sub> 801     NO        
-
-MY1        Westminster - Marylebone Road 2009   NO<sub>2</sub> 469     NO        
-
-MY1        Westminster - Marylebone Road 2010   NO<sub>2</sub> 524     NO        
-
-MY1        Westminster - Marylebone Road 2011   NO<sub>2</sub> 217     NO        
-
-MY1        Westminster - Marylebone Road 2012   NO<sub>2</sub> 122     NO        
-
-MY1        Westminster - Marylebone Road 2013   NO<sub>2</sub> 59      NO        
-
-MY1        Westminster - Marylebone Road 2014   NO<sub>2</sub> 60      NO        
-
-MY1        Westminster - Marylebone Road 2015   NO<sub>2</sub> 56      NO        
-
-WA7        Wandsworth - Putney High      2009   NO<sub>2</sub> 1107    NO        
-           Street                                                                
-
-WA7        Wandsworth - Putney High      2010   NO<sub>2</sub> 2480    NO        
-           Street                                                                
-
-WA7        Wandsworth - Putney High      2011   NO<sub>2</sub> 2768    NO        
-           Street                                                                
-
-WA7        Wandsworth - Putney High      2012   NO<sub>2</sub> 2740    NO        
-           Street                                                                
-
-WA7        Wandsworth - Putney High      2013   NO<sub>2</sub> 1580    NO        
-           Street                                                                
-
-WA7        Wandsworth - Putney High      2014   NO<sub>2</sub> 1537    NO        
-           Street                                                                
-
-WA7        Wandsworth - Putney High      2015   NO<sub>2</sub> 1443    NO        
-           Street                                                                
-
-WA8        Wandsworth - Putney High      2010   NO<sub>2</sub> 1059    NO        
-           Street Facade                                                         
-
-WA8        Wandsworth - Putney High      2011   NO<sub>2</sub> 1662    NO        
-           Street Facade                                                         
-
-WA8        Wandsworth - Putney High      2012   NO<sub>2</sub> 1726    NO        
-           Street Facade                                                         
-
-WA8        Wandsworth - Putney High      2013   NO<sub>2</sub> 661     NO        
-           Street Facade                                                         
-
-WA8        Wandsworth - Putney High      2014   NO<sub>2</sub> 505     NO        
-           Street Facade                                                         
-
-WA8        Wandsworth - Putney High      2015   NO<sub>2</sub> 336     NO        
-           Street Facade                                                         
-
-WM6        Westminster - Oxford Street   2013   NO<sub>2</sub> 1502    NO        
-
-WM6        Westminster - Oxford Street   2014   NO<sub>2</sub> 1532    NO        
-
-WM6        Westminster - Oxford Street   2015   NO<sub>2</sub> 1391    NO        
----------------------------------------------------------------------------------
-
-Table: Exceedances of hourly NO<sub>2</sub> air quality objective per year
+```
+## 
+## 
+## | SiteCode   | SiteName                               | Year   | SpeciesCode    | Value   | Achieved   |
+## |:-----------|:---------------------------------------|:-------|:---------------|:--------|:-----------|
+## | MY1        | Westminster - Marylebone Road          | 1997   | NO<sub>2</sub> | 62      | NO         |
+## | MY1        | Westminster - Marylebone Road          | 1998   | NO<sub>2</sub> | 66      | NO         |
+## | MY1        | Westminster - Marylebone Road          | 1999   | NO<sub>2</sub> | 59      | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2000   | NO<sub>2</sub> | 103     | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2001   | NO<sub>2</sub> | 58      | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2002   | NO<sub>2</sub> | 2       | YES        |
+## | MY1        | Westminster - Marylebone Road          | 2003   | NO<sub>2</sub> | 454     | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2004   | NO<sub>2</sub> | 527     | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2005   | NO<sub>2</sub> | 834     | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2006   | NO<sub>2</sub> | 665     | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2007   | NO<sub>2</sub> | 445     | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2008   | NO<sub>2</sub> | 801     | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2009   | NO<sub>2</sub> | 469     | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2010   | NO<sub>2</sub> | 524     | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2011   | NO<sub>2</sub> | 217     | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2012   | NO<sub>2</sub> | 122     | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2013   | NO<sub>2</sub> | 59      | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2014   | NO<sub>2</sub> | 60      | NO         |
+## | MY1        | Westminster - Marylebone Road          | 2015   | NO<sub>2</sub> | 56      | NO         |
+## | WA7        | Wandsworth - Putney High Street        | 2009   | NO<sub>2</sub> | 1107    | NO         |
+## | WA7        | Wandsworth - Putney High Street        | 2010   | NO<sub>2</sub> | 2480    | NO         |
+## | WA7        | Wandsworth - Putney High Street        | 2011   | NO<sub>2</sub> | 2768    | NO         |
+## | WA7        | Wandsworth - Putney High Street        | 2012   | NO<sub>2</sub> | 2740    | NO         |
+## | WA7        | Wandsworth - Putney High Street        | 2013   | NO<sub>2</sub> | 1580    | NO         |
+## | WA7        | Wandsworth - Putney High Street        | 2014   | NO<sub>2</sub> | 1537    | NO         |
+## | WA7        | Wandsworth - Putney High Street        | 2015   | NO<sub>2</sub> | 1443    | NO         |
+## | WA8        | Wandsworth - Putney High Street Facade | 2010   | NO<sub>2</sub> | 1059    | NO         |
+## | WA8        | Wandsworth - Putney High Street Facade | 2011   | NO<sub>2</sub> | 1662    | NO         |
+## | WA8        | Wandsworth - Putney High Street Facade | 2012   | NO<sub>2</sub> | 1726    | NO         |
+## | WA8        | Wandsworth - Putney High Street Facade | 2013   | NO<sub>2</sub> | 661     | NO         |
+## | WA8        | Wandsworth - Putney High Street Facade | 2014   | NO<sub>2</sub> | 505     | NO         |
+## | WA8        | Wandsworth - Putney High Street Facade | 2015   | NO<sub>2</sub> | 336     | NO         |
+## | WM6        | Westminster - Oxford Street            | 2013   | NO<sub>2</sub> | 1502    | NO         |
+## | WM6        | Westminster - Oxford Street            | 2014   | NO<sub>2</sub> | 1532    | NO         |
+## | WM6        | Westminster - Oxford Street            | 2015   | NO<sub>2</sub> | 1391    | NO         |
+## 
+## Table: Exceedances of hourly NO<sub>2</sub> air quality objective per year
+```
 
 **Note:** *There is no data for Putney High Street prior to 2009 whilst measurements at Putney High Street Facade commenced the following year.  NO<sub>2</sub> statistics for Oxford Street Kerbside are not available until 2013.*
 
-The plot and table show that hourly NO<sub>2</sub> concentrations at all sites routinely exceed the national air quality objective of 18 exceedances per year.  Whilst the number have fallen at all sites in recent years, it still remains high.  The number of exceedances were especially high at Putney High Street and Putney High Street Facade where 1443 and 336 exceedances, respectively, were recorded in 2015.  The number at Marylebone Road and Oxford Street Kerbside were 56 and 1391, respectively, for the same year.
+The barplot shows that hourly NO<sub>2</sub> concentrations at all sites routinely exceed the national air quality objective of 18 exceedances per year.  Whilst the number have fallen at all sites in recent years, it still remains high.  The number of exceedances were especially high at Putney High Street and Putney High Street Facade where 1443 and 336 exceedances, respectively, were recorded in 2015.  The number at Marylebone Road and Oxford Street Kerbside were 56 and 1391, respectively, for the same year.
 
 ## ```get_laqn_sites```
 The location of the LAQN air quality monitoring stations at Marylebone Road, Oxford Street and Putney High Street can be viewed by using the ouput from ```get_laqn_sites```.
