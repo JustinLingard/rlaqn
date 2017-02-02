@@ -30,5 +30,4 @@
   # Not run
   # laqn_sites <- get_laqn_sites()
   # write.table(laqn_sites, file = "laqn_sites.txt", row.names = FALSE, quote = FALSE, sep = ";")
-  # End
-  
+  # End (Not run)
