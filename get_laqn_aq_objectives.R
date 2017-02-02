@@ -41,7 +41,7 @@
       theData[, c(".id")] = NULL
       
       # Remove factors
-      theData <- data.frame(lapply(aq_objectives, as.character), 
+      theData <- data.frame(lapply(theData, as.character), 
                             stringsAsFactors = FALSE)
       
       # Convert columns to numeric
