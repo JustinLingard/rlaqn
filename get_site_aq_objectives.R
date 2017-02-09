@@ -1,6 +1,6 @@
 #' 
 #' @author JJNL 
-#' @date 02/2/2016
+#' @date 02/02/2016
 #' 
 #' @description 
 #' Gets pre-calculated annual air quality objectives   
@@ -10,13 +10,14 @@
 
   get_site_aq_objectives <- function (theSite = "ZV1", metric = "Annual",
                                       data_type = "MonitoringObjective",
-                                      dates = 1980, datee = as.numeric(format(Sys.Date(), "%Y")),
+                                      dates = 1990, datee = as.numeric(format(Sys.Date(), "%Y")),
                                       api_type = "Json")
   {
   
   # Create the year range
   theYears <- seq(dates, datee, 1)
     if (length(theYears) == 1) { theYears <- unique(theYears) }
+  theYears <- rep(theYears, each = length(theSite))
   
   # Create the API
   base_api <- "http://api.erg.kcl.ac.uk/AirQuality/"
@@ -49,7 +50,13 @@
 }
 
   # Not run  
-  # site_aq_objectives <- get_site_aq_objectives()
+  # kcl_sites <- openair::importMeta(source = "kcl", all = TRUE)
+  # Start the clock!
+  # ptm <- proc.time()
+  # kcl_sites_aq_objectives <- get_site_aq_objectives(theSite = kcl_sites$code)
+  # Stop the clock
+  # theTime <- proc.time() - ptm
   # Save to file
-  # write.table(site_aq_objectives, file = "site_aq_objectives.txt", row.names = FALSE, quote = FALSE, sep = ";")
+  # write.table(kcl_sites_aq_objectives, file = "kcl_sites_aq_objectives.txt",
+  #             row.names = FALSE, quote = FALSE, sep = ";")
   # End (Not run)
