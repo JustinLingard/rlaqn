@@ -111,9 +111,6 @@ returns all the air quality objectives since the inception of the network, even 
 Site meta data, for each past and current air quality monitoring station in the LAQN, can be obtained using the ```get_laqn_sites``` function, e.g.,
 ```{r, eval=FALSE}
 > laqn_sites <- get_laqn_sites()
-```
-
-```{r, eval=FALSE}
 > head(laqn_sites)
   LocalAuthorityCode   LocalAuthorityName SiteCode                              SiteName
 1                  1 Barking and Dagenham      BG3   Barking and Dagenham - North Street
@@ -229,7 +226,7 @@ The ```GroupName``` can be passed to ```get_laqn_sites``` to generate the site m
 5 http://www.londonair.org.uk/london/asp/publicdetails.asp?site=BG2
 6 http://www.londonair.org.uk/london/asp/publicdetails.asp?site=BN2
 ```
-This provides a similar output to that generated using ```importMeta(source = "kcl", all = TRUE)``` from the ```openair``` package (are there any differences?).  But further examination reveals that there are only 354 unique `SiteCodes` as some sites appear several times.
+This provides a similar output to ```openair::importMeta(source = "kcl", all = TRUE)```. Grouping and summarising the the data using ```dplyr``` reveals that there are only 354 unique `SiteCodes` as some sites appear several times.
 ```{r, eval=FALSE}
 > library(dplyr)
 > kcl_sites %>% 

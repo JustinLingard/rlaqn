@@ -103,10 +103,6 @@ Site meta data, for each past and current air quality monitoring station in the 
 
 ```r
 > laqn_sites <- get_laqn_sites()
-```
-
-
-```r
 > head(laqn_sites)
   LocalAuthorityCode   LocalAuthorityName SiteCode                              SiteName
 1                  1 Barking and Dagenham      BG3   Barking and Dagenham - North Street
@@ -314,7 +310,7 @@ Combining the two sets of data provides an intercomparison of the number of exce
 > ggplot(theData, aes(Year, Value, fill = SiteCode)) + geom_bar(stat ="identity", position = "dodge") + scale_y_continuous(name = bquote('Exceedances of hourly' ~NO[2]~ 'air quality objective per year')) +  theme(legend.position = "none") + facet_grid(~SiteCode) + coord_flip()
 ```
 
-![](README_files/figure-html/unnamed-chunk-21-1.png)<!-- -->
+![](README_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
 
 
 
