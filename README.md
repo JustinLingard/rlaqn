@@ -227,7 +227,7 @@ The ```GroupName``` can be passed to ```get_laqn_sites``` to generate the site m
 5 http://www.londonair.org.uk/london/asp/publicdetails.asp?site=BG2
 6 http://www.londonair.org.uk/london/asp/publicdetails.asp?site=BN2
 ```
-This provides a similar output to that generated using ```importMeta(source = "kcl", all = TRUE)``` from the ```openair``` package (are there any differences?).  But further examination reveals that there are only 354 unique `SiteCodes` as some sites appear several times.
+This provides a similar output to ```openair::importMeta(source = "kcl", all = TRUE)```. Grouping and summarising the the data using ```dplyr``` reveals that there are only 354 unique `SiteCodes` as some sites appear several times.
 
 ```r
 > library(dplyr)
