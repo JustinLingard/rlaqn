@@ -299,7 +299,7 @@ Combining the two sets of data provides an intercomparison of the number of exce
 > theData <- plyr::rbind.fill(westminster_sites, putney_sites)
 > theData <- theData %>% filter(Year < as.integer(format(Sys.Date(), "%Y"))-1)
 > library(ggplot2)
-> ggplot(theData, aes(Year, Value, fill = SiteCode)) + geom_bar(stat ="identity", position = "dodge") + scale_y_continuous(name = "Exceedances per year") +  theme(legend.position = "none") + facet_grid(~SiteCode) + coord_flip()
+> ggplot(theData, aes(Year, Value, fill = SiteCode)) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(name = "Exceedances per year") +  theme(legend.position = "none") + facet_grid(~SiteCode) + coord_flip()
 ```
 
 
@@ -307,7 +307,7 @@ Combining the two sets of data provides an intercomparison of the number of exce
 # Table 1
 > theData <- arrange(select(theData, SiteCode, SiteName, Year, SpeciesCode, Value, Achieved), SiteCode, Year)
 > theData$SpeciesCode <- gsub(pattern = "NO2", replacement = "NO<sub>2</sub>", theData$SpeciesCode)
-> ggplot(theData, aes(Year, Value, fill = SiteCode)) + geom_bar(stat ="identity", position = "dodge") + scale_y_continuous(name = bquote('Exceedances of hourly' ~NO[2]~ 'air quality objective per year')) +  theme(legend.position = "none") + facet_grid(~SiteCode) + coord_flip()
+> ggplot(theData, aes(Year, Value, fill = SiteCode)) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(name = bquote('Exceedances of hourly' ~NO[2]~ 'air quality objective per year')) +  theme(legend.position = "none") + facet_grid(~SiteCode) + coord_flip()
 ```
 
 ![](README_files/figure-html/unnamed-chunk-20-1.png)<!-- -->

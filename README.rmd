@@ -298,14 +298,14 @@ Combining the two sets of data provides an intercomparison of the number of exce
 > theData <- plyr::rbind.fill(westminster_sites, putney_sites)
 > theData <- theData %>% filter(Year < as.integer(format(Sys.Date(), "%Y"))-1)
 > library(ggplot2)
-> ggplot(theData, aes(Year, Value, fill = SiteCode)) + geom_bar(stat ="identity", position = "dodge") + scale_y_continuous(name = "Exceedances per year") +  theme(legend.position = "none") + facet_grid(~SiteCode) + coord_flip()
+> ggplot(theData, aes(Year, Value, fill = SiteCode)) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(name = "Exceedances per year") +  theme(legend.position = "none") + facet_grid(~SiteCode) + coord_flip()
 ```
 
 ```{r, eval=FALSE}
 # Table 1
 > theData <- arrange(select(theData, SiteCode, SiteName, Year, SpeciesCode, Value, Achieved), SiteCode, Year)
 > theData$SpeciesCode <- gsub(pattern = "NO2", replacement = "NO<sub>2</sub>", theData$SpeciesCode)
-> ggplot(theData, aes(Year, Value, fill = SiteCode)) + geom_bar(stat ="identity", position = "dodge") + scale_y_continuous(name = bquote('Exceedances of hourly' ~NO[2]~ 'air quality objective per year')) +  theme(legend.position = "none") + facet_grid(~SiteCode) + coord_flip()
+> ggplot(theData, aes(Year, Value, fill = SiteCode)) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(name = bquote('Exceedances of hourly' ~NO[2]~ 'air quality objective per year')) +  theme(legend.position = "none") + facet_grid(~SiteCode) + coord_flip()
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -316,7 +316,7 @@ library(dplyr)
 theData <- aq_objectives %>% filter(SiteCode == "MY1" | SiteCode == "WM6" | SiteCode == "WA7" | SiteCode == "WA8") %>% filter(ObjectiveName == "200 ug/m3 as a 1 hour mean, not to be exceeded more than 18 times a year")
 theData <- theData %>% filter(Year < as.integer(format(Sys.Date(), "%Y"))-1)
 library(ggplot2)
-ggplot(theData, aes(Year, Value, fill = SiteCode)) + geom_bar(stat ="identity", position = "dodge") + scale_y_continuous(name = bquote('Exceedances of hourly' ~NO[2]~ 'air quality objective per year')) +  theme(legend.position = "none") + facet_grid(~SiteCode) + coord_flip() 
+ggplot(theData, aes(Year, Value, fill = SiteCode)) + geom_bar(stat = "identity", position = "dodge") + scale_y_continuous(name = bquote('Exceedances of hourly' ~NO[2]~ 'air quality objective per year')) +  theme(legend.position = "none") + facet_grid(~SiteCode) + coord_flip() 
 ```
 
 ```{r, eval=FALSE, results="asis", echo=FALSE, warning=FALSE}
